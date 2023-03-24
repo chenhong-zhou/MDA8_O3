@@ -1,5 +1,3 @@
-
-
 import math
 from random import shuffle
 import numpy as np
@@ -7,11 +5,9 @@ import pandas as pd
 import xarray as xr
 import matplotlib.pyplot as plt
 
-
 from sklearn.model_selection import cross_val_score, cross_validate,cross_val_predict
 from sklearn.model_selection import RepeatedKFold,KFold
 from sklearn.ensemble import ExtraTreesRegressor,RandomForestRegressor
-
 
 from scipy.io import loadmat,savemat
 import scipy.stats as stats
@@ -20,10 +16,6 @@ from xgboost import plot_importance
 from xgboost import cv
 from scipy.io import savemat
 import pickle
-
-
-
-
 
 
 mat = loadmat('./all_samples_data_all_info_new_all_sites_repeat_2013_2022.mat')
@@ -47,7 +39,6 @@ for ii in range(23):
 # ### 检测填充情况
 for ii in range(23):
     np.where(np.isnan(all_samples_variables[:,ii]))[0].shape   
-
 
 
 
@@ -109,7 +100,6 @@ for ii in range(10):
     model.fit(X_train, y_train)
     
     savepath = './results/'
-    
     
     
     print('n_estimator: ', other_params['n_estimators'])
@@ -183,39 +173,3 @@ savemat(filename, mdict)
 
 
 
-
-
- ####### 参数
-# try:
-    # print('input n_estimator: ', int(args.n_estimator))
-    # print('input max_depth: ', int(args.max_depth))
-    # print('input min_child_weight: ', int(args.min_child_weight))
-    # model = set_model(int(args.n_estimator), int(args.max_depth), int(args.min_child_weight))
-# except Exception as e:
-    # print(e)
-
-
-
-
-
-# scores = cross_validate(model, X, y, cv=cv,
-                        # scoring=('r2', 'neg_mean_squared_error','neg_mean_absolute_error'),
-                        # return_train_score=True)   #, n_jobs = -1
-# print(scores)
-# print('train r2 mean: ', np.mean(scores['train_r2']))
-# print('train r2 std: ', np.std(scores['train_r2']))
-# print('train neg_MSE mean: ', np.sqrt(np.abs(np.mean(scores['train_neg_mean_squared_error']))))  #np.mean(scores['train_neg_mean_squared_error']) 
-# print('train neg_MSE std: ', np.std(scores['train_neg_mean_squared_error']))  # 
-# print('train neg_MAE mean: ', np.abs(np.mean(scores['train_neg_mean_absolute_error'])))   #np.mean(scores['train_neg_mean_absolute_error'])
-# print('train neg_MAE std: ', np.std(scores['train_neg_mean_absolute_error']) )    # 
-# print('test: ')
-# print('r2 mean: ', np.mean(scores['test_r2']))
-# print('r2 std: ', np.std(scores['test_r2']))
-# print('neg_MSE mean: ', np.sqrt(np.abs(np.mean(scores['test_neg_mean_squared_error']))))  #np.mean(scores['test_neg_mean_squared_error'])
-# print('neg_MSE std: ', np.std(scores['test_neg_mean_squared_error']))   #
-# print('neg_MAE mean: ', np.abs(np.mean(scores['test_neg_mean_absolute_error'])))   #np.mean(scores['test_neg_mean_absolute_error'])
-# print('neg_MAE std: ', np.std(scores['test_neg_mean_absolute_error']))   #
-
-# mdict = {'scores': scores}
-# savemat('./all_sites_repeat_results/scores_'+ str(args.n_estimator) + '_' + str(args.max_depth) +'_' + str(args.min_child_weight)  +'.mat', mdict)
-# # savemat('./results/scores_n_'+ str(args.n_estimator) + '_d_' + str(args.max_depth) +'_w_' + str(args.min_child_weight)  +'.mat', mdict)
